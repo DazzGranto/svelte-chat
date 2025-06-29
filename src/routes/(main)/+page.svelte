@@ -1,25 +1,22 @@
 <script lang="ts">
-	import { socket } from '$lib/socket';
-	import { onMount } from 'svelte';
-
-	let connected = $state(false);
-
-	onMount(() => {
-		const handleConnect = () => (connected = true);
-		const handleDisconnect = () => (connected = false);
-
-		socket.on('connect', handleConnect);
-		socket.on('disconnect', handleDisconnect);
-
-		return () => {
-			socket.off('connect', handleConnect);
-			socket.off('disconnect', handleConnect);
-		};
-	});
+	let { form } = $props();
 </script>
 
-{#if connected}
-	<p>connected</p>
-{:else}
-	<p>disconnected</p>
-{/if}
+<section class="grid size-full place-items-center">
+	<form method="post" class="flex w-full max-w-md flex-col gap-4">
+		{#if form?.error}
+			<p class="text-center">{form.error}</p>
+		{/if}
+		<input
+			type="text"
+			name="username"
+			placeholder="username"
+			minlength="3"
+			maxlength="32"
+			autocomplete="off"
+			required
+			class="border border-zinc-700 bg-zinc-800 px-4 py-2 outline-none"
+		/>
+		<button type="submit" class="border border-zinc-700 bg-zinc-800 py-2">login</button>
+	</form>
+</section>
