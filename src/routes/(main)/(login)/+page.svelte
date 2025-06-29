@@ -17,6 +17,8 @@
 			required
 			class="border border-zinc-700 bg-zinc-800 px-4 py-2 outline-none"
 		/>
-		<button type="submit" class="border border-zinc-700 bg-zinc-800 py-2">login</button>
+		<button type="submit" class="cursor-pointer border border-zinc-700 bg-zinc-800 py-2">
+			login
+		</button>
 	</form>
 </section>
